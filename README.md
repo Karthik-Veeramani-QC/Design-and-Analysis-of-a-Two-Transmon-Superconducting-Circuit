@@ -1,29 +1,19 @@
-# Design and Quantum Analysis of a Bus-Coupled Two-Transmon Superconducting Circuit
+# Design and Analysis of a Bus-Coupled Two-Transmon Superconducting Circuit
 
-This repository contains the simulation data, analysis notebooks, and technical documentation for the design of a bus-coupled two-transmon superconducting circuit. The project demonstrates a complete workflow from physical layout in **Qiskit Metal** to full-wave electromagnetic simulation in **Ansys HFSS/Q3D**, and finally to quantum parameter extraction using the **Energy Participation Ratio (EPR)** method and **Lumped Oscillator Model (LOM)**.
+This repository contains the Python notebooks, parameter sweep data, and final report for the design and quantum parameter extraction of a two-transmon circuit[cite: 4]. 
 
-Developed within the Department of Physics at IIT (BHU) Varanasi under the supervision of Dr. Rajeev Singh.
+## Files
+*   **`2_transmons_coupling_analysis_epr.ipynb`**: Extracts the quantum Hamiltonian (frequencies, anharmonicities, and Kerr interactions) from HFSS eigenmode data using pyEPR.
+*   **`2_transmons_coupling_analysis_lom.ipynb`**: Evaluates the effect of readout coupling geometry on dispersive shift and Purcell decay using the Lumped Oscillator Model (LOM) and Q3D capacitance matrices.
+*   **`Data_used_for_graphs.xlsx`**: Raw data from the geometric parameter sweeps.
+*   **`2 qubit report final.pdf`**: Final project report detailing the full methodology and results.
 
-## 📁 Repository Contents
+## Methods Used
+*   **Circuit Layout:** Qiskit Metal[cite: 4]
+*   **Electromagnetic Simulation:** Ansys HFSS (Eigenmode solver) and Q3D Extractor[cite: 4]
+*   **Quantum Analysis:** Energy Participation Ratio (EPR) via pyEPR and Lumped Oscillator Model (LOM)[cite: 4]
 
-*   **`2_transmons_coupling_analysis_epr.ipynb`**: Jupyter notebook executing the Energy Participation Ratio (EPR) analysis via `pyEPR`. This script imports the HFSS eigenmode solutions to extract the multimode quantum Hamiltonian, including qubit anharmonicities and Kerr interactions.
-*   **`2_transmons_coupling_analysis_lom.ipynb`**: Jupyter notebook performing a parametric study using the Lumped Oscillator Model (LOM). It utilizes the Q3D capacitance matrix to evaluate how coupling geometry impacts the dispersive shift and Purcell decay.
-*   **`Data_used_for_graphs.xlsx`**: Raw datasets containing the parameter sweep results (coupling pad width and gap distance vs. coupling strength, dispersive shift, and $T_1$ times).
-*   **`2 qubit report final.pdf`**: The comprehensive technical report detailing the theoretical background, methodology, and final results.
-
-## 🔬 Architecture & Methodology
-
-The circuit architecture consists of two capacitively shunted, fixed-frequency transmon qubits coupled via a common coplanar waveguide (CPW) bus resonator, with independent dispersive readout resonators and charge-bias lines. 
-
-The analysis pipeline involves:
-1.  **Layout Generation:** Procedural generation of the circuit geometry using Qiskit Metal.
-2.  **Electromagnetic Simulation:** Extracting the first three eigenmodes using the Ansys HFSS Eigenmode solver and capacitance matrices via Q3D Extractor. 
-3.  **Quantum Parameter Extraction:** 
-    *   Using pyEPR to verify that the qubit modes are well-confined (negligible cross-participation) and to extract the static ZZ coupling.
-    *   Using LOM to optimize the qubit-readout subsystem geometry.
-
-## 📊 Key Results
-
-*   **Qubit Regimes:** The extracted parameters confirm the circuit operates well within the transmon regime, with qubit frequencies near 5 GHz, anharmonicities of ~330 MHz, and an $E_J/E_C$ ratio of approximately 35.
-*   **Bus Isolation:** The central bus resonator exhibits an anharmonicity of only 18.8 kHz, confirming it behaves as a linear interaction channel. The static ZZ coupling of -0.163 MHz indicates the qubits remain highly isolated during idle operation.
-*   **Geometry Optimization:** Parameter sweeps identified an optimal coupling pad width of 60-75 μm and a coupling gap of 15-20 μm, providing an ideal balance between strong readout efficiency (dispersive shift) and coherence preservation (Purcell-limited relaxation).
+## Key Results
+*   **Qubit Parameters:** The extracted qubit frequencies are near 5 GHz with anharmonicities of approximately 330 MHz and an $E_J/E_C$ ratio of ~35, placing the circuit well within the transmon regime[cite: 4].
+*   **Bus Isolation:** The central bus resonator has an anharmonicity of 18.8 kHz, confirming it operates as a linear microwave resonator[cite: 4]. The static ZZ coupling is -0.163 MHz, indicating the qubits remain largely isolated during idle operation[cite: 4].
+*   **Geometry Optimization:** LOM sweeps indicated that a readout coupling pad width of 60-75 μm and a coupling gap of 15-20 μm provides a suitable balance between readout coupling strength (55-90 MHz) and Purcell-limited relaxation time[cite: 4].
