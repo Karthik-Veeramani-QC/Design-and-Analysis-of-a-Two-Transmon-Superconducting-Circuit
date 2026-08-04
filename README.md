@@ -1,22 +1,50 @@
 # Design and Analysis of a Bus-Coupled Two-Transmon Superconducting Circuit
 
-This repository contains the Python notebooks, parameter sweep data, and final report for the design and quantum parameter extraction of a two-transmon circuit. 
+This repository contains the design files, Python notebooks, and report for the analysis of a bus-coupled two-transmon superconducting circuit. The project investigates the effect of readout coupling geometry on qubit frequencies, dispersive shift, coupling strength, and Purcell-limited relaxation using full-wave electromagnetic simulations and quantum parameter extraction.
 
-## Files
-*   **`2_transmons_coupling_analysis_epr.ipynb`**: Extracts the quantum Hamiltonian (frequencies, anharmonicities, and Kerr interactions) from HFSS eigenmode data using pyEPR.
-*   **`2_transmons_coupling_analysis_lom.ipynb`**: Evaluates the effect of readout coupling geometry on dispersive shift and Purcell decay using the Lumped Oscillator Model (LOM) and Q3D capacitance matrices.
-*   **`Data_used_for_graphs.xlsx`**: Raw data from the geometric parameter sweeps.
-*   **`2 qubit report final.pdf`**: Final project report detailing the full methodology and results.
+## Repository Structure
 
-## Methods Used
-*   **Circuit Layout:** Qiskit Metal.
-*   **Electromagnetic Simulation:** Ansys HFSS (Eigenmode solver) and Q3D Extractor.
-*   **Quantum Analysis:** Energy Participation Ratio (EPR) via pyEPR and Lumped Oscillator Model (LOM).
+- **2_transmons_coupling_analysis_epr.ipynb** – Quantum Hamiltonian extraction (frequencies, anharmonicities and Kerr interactions) using pyEPR.
+- **2_transmons_coupling_analysis_lom.ipynb** – Lumped Oscillator Model (LOM) analysis of dispersive shift, coupling strength and Purcell decay using Q3D capacitance matrices.
+- **Data_used_for_graphs.xlsx** – Parameter sweep data.
+- **2_qubit_report_final.pdf** – Complete project report.
+
+## Workflow
+
+```
+Qiskit Metal
+      ↓
+HFSS Eigenmode + Q3D
+      ↓
+pyEPR / LOM
+      ↓
+Quantum Hamiltonian
+      ↓
+Geometry Optimization
+```
+
+## Methods
+
+- Circuit Layout: Qiskit Metal
+- Electromagnetic Simulation: Ansys HFSS (Eigenmode) and Q3D Extractor
+- Quantum Analysis: pyEPR and Lumped Oscillator Model (LOM)
 
 ## Key Results
-*   **Qubit Parameters & Regime:** The extracted qubit frequencies are 4.646 GHz and 4.858 GHz, with anharmonicities of 327.23 MHz and 326.27 MHz. The calculated $E_J/E_C$ ratio of approximately 35 confirms the circuit operates strictly within the transmon regime.
-*   **Bus Isolation:** The central bus resonator has a negligible anharmonicity of 18.8 kHz, verifying it acts as a linear microwave resonator. The static ZZ coupling is -0.163 MHz, indicating the qubits remain well-isolated during idle operation.
-*   **Readout Geometry & Purcell Decay:** LOM sweeps revealed a direct trade-off between readout efficiency and coherence. Increasing the coupling pad width (30 to 100 μm) increased the dispersive shift from 0.27 MHz to 0.72 MHz and coupling strength from 55 MHz to 91 MHz, but drastically reduced the Purcell-limited relaxation time ($T_1$) from nearly 900 μs to 330 μs. An optimal balance is achieved using a coupling pad width of 60-75 μm and a coupling gap of 15-20 μm.
 
-## What I Learned
-This project taught me the practical workflow of taking a theoretical circuit and turning it into a physical layout. I learned how to extract raw electromagnetic modes and capacitance matrices from Ansys HFSS and Q3D, and how to actually translate those into a quantum Hamiltonian using pyEPR. It also gave me a much clearer understanding of the Purcell effect in practice. Seeing how just tweaking the physical geometry to get a better readout signal directly ruins the qubit's $T_1$ time, and figuring out how to optimize that trade-off.
+| Parameter | Value |
+|-----------|------:|
+| Qubit Frequencies | 4.646 GHz, 4.858 GHz |
+| Anharmonicities | 327.23 MHz, 326.27 MHz |
+| \(E_J/E_C\) | ~35 |
+| Bus Anharmonicity | 18.8 kHz |
+| Static ZZ Coupling | -0.163 MHz |
+
+### Readout Geometry
+
+Increasing the coupling pad width from **30 μm to 100 μm** increased the coupling strength from **55 MHz to 91 MHz** and the dispersive shift from **0.27 MHz to 0.72 MHz**, but reduced the Purcell-limited relaxation time from **~900 μs to ~330 μs**.
+
+The optimum design was obtained for a coupling pad width of **60–75 μm** with a coupling gap of **15–20 μm**, providing a balance between readout strength and qubit coherence.
+
+## Report
+
+A detailed description of the methodology, simulations, and results is available in **2_qubit_report_final.pdf**.
