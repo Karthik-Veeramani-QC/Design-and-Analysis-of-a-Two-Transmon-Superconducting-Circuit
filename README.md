@@ -3,7 +3,7 @@
 This repository contains the design files, Python notebooks, and report for the analysis of a bus-coupled two-transmon superconducting circuit. The project investigates the effect of readout coupling geometry on qubit frequencies, dispersive shift, coupling strength, and Purcell-limited relaxation using full-wave electromagnetic simulations and quantum parameter extraction.
 
 <p align="center">
-  <img src="images/circuit_two_transmons.png" width="750">
+  <img src="circuit_two_transmons.png" width="750">
 </p>
 
 ## Repository Structure
